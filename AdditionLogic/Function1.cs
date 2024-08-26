@@ -19,15 +19,16 @@ namespace AdditionLogic
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string name = req.Query["name"];
+            int a = Convert.ToInt32(req.Query["var1"]);
+            int b = Convert.ToInt32(req.Query["var2"]);
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+           // name = name ?? data?.name;
 
-            string responseMessage = string.IsNullOrEmpty(name)
+            string responseMessage = string.IsNullOrEmpty("test")
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
+                : $"Sum is, {a + b}. This HTTP triggered function executed successfully.";
 
             return new OkObjectResult(responseMessage);
         }
